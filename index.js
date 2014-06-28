@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var app = express();
 
@@ -15,18 +16,18 @@ mongo_db_table = process.env.MONGOHQ_URL || 'mongodb://localhost:27017/test';
 mongoose.connect(mongo_db_table);
 
 // Models
-var Habit = mongoose.model(
-    'Habit', {
-        name: String,
-    }
-);
+var habit_schema = Schema({
+    name: String
+});
 
-var HabitDone = mongoose.model(
-    'HabitDone', {
-        habit: String,
-        when: Date,
-    }
-);
+var habit_done_schema = Schema({
+    habit: { type: Schema.Types.ObjectId, ref: 'Habit' },
+    when: Date
+});
+
+var Habit  = mongoose.model('Habit', habit_schema);
+var HabitDone = mongoose.model('HabitDone', habit_done_schema);
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -34,12 +35,20 @@ app.use(bodyParser.urlencoded());
 app.use(express.static(__dirname + '/public'));
 
 app.get('/habits', function(req, res) {
-    var query = Habit.find().select('name');
+    var query = Habit.find().select('id_ name');
 
     query.exec(function (err, habits) {
         if (err) return handleError(err);
-        res.send(habits.map(function(habit) { return habit.name }));
+        res.send(habits);
     })
+});
+
+app.get('/habits_done', function(req, res) {
+    var habit_id = req.param('habit_id');
+    console.log(habit_id);
+    HabitDone.count({'habit': habit_id}, function(err, count) {
+        res.send(count);
+    });
 });
 
 app.post('/add_habit', function(req, res){
@@ -47,9 +56,11 @@ app.post('/add_habit', function(req, res){
 
     // Save habit
     var habit = new Habit({ name: habit_name });
+    console.log(habit);
     habit.save(function (err) {
         if (err) {
-            console.log('Error storing: ' + habit);
+            console.log('Error storing (Habit): ' + habit);
+            console.log(err);
             res.send("Fail!");
         }
         res.send("Sent!");
@@ -68,7 +79,8 @@ app.post('/', function(req, res){
             var habit_done = new HabitDone({ habit: habit_id });
             habit_done.save(function (err) {
                 if (err) {
-                    console.log('Error storing: ' + habit_done);
+                    console.log('Error storing (HabitDone): ' + habit_done);
+                    console.log(err);
                 }
             });
 
