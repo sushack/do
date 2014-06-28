@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sushack/do/issues"
   },
-  "homepage": "https://github.com/sushack/do"
+  "homepage": "https://github.com/sushack/do",
+  "dependencies": {
+    "express": "~4.4.5"
+  }
 }
