@@ -66,30 +66,12 @@
         <script src="reqwest.js" ></script>
         <script src="lib/react/react.js"></script>
         <script src="lib/hammerjs/hammer.min.js"></script>
-        <script src="do.js"></script>
 
         <script>
             (function(){
-                var pubnub = PUBNUB.init({
-                subscribe_key : 'demo'
+                var pubnub = window.pubnub = PUBNUB.init({
+                    subscribe_key : 'demo'
                 });
-                pubnub.subscribe({
-                    channel : "do_channel",
-                    message : function(m){
-                        console.log(m);
-                        var buttons = document.querySelectorAll('[name=id]');
-                        var button;
-                        [].some.call(buttons, function(b){
-                            if(b.value == m.did) return (button = b);
-                        });
-                        var classes = button.parentElement.classList;
-                        classes.add('triggered');
-                        setTimeout(function(){
-                            classes.remove('triggered');
-                        },1000);
-                    },
-                });
-                // submit with ajax instead
                 document.addEventListener('submit', function(e){
                     if (e.target.id === 'add') {
                         console.log('the add form submitted');
@@ -128,5 +110,8 @@
                 );
             })();
         </script>
+
+
+        <script src="do.js"></script>
     </body>
 </html>
