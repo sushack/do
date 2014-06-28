@@ -1,0 +1,19 @@
+{
+  "name": "do",
+  "version": "0.0.0",
+  "description": "Habits thingy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sushack/do.git"
+  },
+  "author": "Ben and Gil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sushack/do/issues"
+  },
+  "homepage": "https://github.com/sushack/do"
+}
