@@ -85,9 +85,15 @@ h1 {
     }
     .habit-count {
         position: absolute;
-        right: 20px;
-        bottom: 20px;
-        font-size: 22px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 20px;
+        width: 60px;
+        font-size: 30px;
+        line-height: 60px;
+        text-align: center;
+        background-color: rgba(255,255,255,.2);
     }
 
 }
@@ -141,4 +147,53 @@ svg {
             z-index: -1;
         }
     }
+
+    .inner {
+
+        * {
+            display: block;
+            width: 100%;
+            clear: both;
+            margin: 0 0 20px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-transform: uppercase;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+        }
+        input[type=text] {
+            font-size: 20px;
+            outline: 0;
+            border: 4px solid #eee;
+        }
+        input[type=submit],
+        .close {
+            border: 4px solid darken(hotpink, 2%);
+            background-color: hotpink;
+            outline: none;
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+
+            &:hover {
+                background-color: lighten(hotpink, 10%);
+                border-color: lighten(hotpink, 8%);
+            }
+        }
+        input[type=submit] {
+
+        }
+        .close {
+
+        }
+    }
+
 }
