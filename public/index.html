@@ -58,9 +58,10 @@
 					if(b.value == m.did) return (button = b)
 				});
 
-				button.parentElement.style.background = 'hotpink';
+				var classes = button.parentElement.classList;
+				classes.add('triggered')
 				setTimeout(function(){
-					button.parentElement.style.background = '';
+					classes.remove('triggered')
 				},1000);
 
 			},
