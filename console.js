@@ -5,7 +5,7 @@ var PUBNUB = require("pubnub").init({
     subscribe_key : "demo"
 });
 
-pubnub.subscribe({
+PUBNUB.subscribe({
     channel  : CHANNEL_NAME,
     callback : function(message) {
         console.log( " > ", message );
