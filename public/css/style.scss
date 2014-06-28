@@ -100,6 +100,7 @@ h1 {
     .habit-remove {
         width: 0;
         overflow: hidden;
+        color: transparent;
     }
     .habit-count,
     .habit-remove {
@@ -115,7 +116,6 @@ h1 {
             line-height: 90px;
             cursor: pointer;
             color: #d00;
-            @include transition(0, width);
         }
     }
 
