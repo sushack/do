@@ -124,14 +124,18 @@
                 });
                 // submit with ajax instead
                 document.addEventListener('submit', function(e){
-                    e.preventDefault();
-                    var idvalue = e.target.querySelector('[name=id]').value;
-                    reqwest({
-                        url: '/'
-                        , method: 'post'
-                        , data: { id: idvalue }
-                        , success: function (resp) {}
-                    });
+                    if (e.target.id === 'add') {
+                        console.log('the add form submitted');
+                    }else{
+                        e.preventDefault();
+                        var idvalue = e.target.querySelector('[name=id]').value;
+                        reqwest({
+                            url: '/'
+                            , method: 'post'
+                            , data: { id: idvalue }
+                            , success: function (resp) {}
+                        });
+                    }
                 }, true);
             })();
         </script>
