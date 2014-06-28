@@ -5,7 +5,7 @@ var HabitList = React.createClass({
 		return {items: []};
 	},
 	componentWillMount: function() {
-		reqwest(this.props.endpoint).then(function(d){
+		reqwest({url:this.props.endpoint,data:{burst:Math.random()}}).then(function(d){
 			this.setState({items:d})
 		}.bind(this));
 		// connect to pubnub
@@ -61,7 +61,7 @@ var Habit = React.createClass({
 		return {count: 0};
 	},
 	componentWillMount: function() {
-		reqwest('habits/' + this.props.id)
+		reqwest({url:'habits/' + this.props.id,data:{burst:Math.random()}})
 		.then(this.setState.bind(this));
 	},
 	handleDelete: function(){
