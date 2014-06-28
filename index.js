@@ -100,6 +100,7 @@ app.post('/', function(req, res){
                     console.log(error);
                 }
             });
+            res.send("ok")
         },
         error: function(e) {
             res.send("FAIL! Tracking: " + req.param('id'));
