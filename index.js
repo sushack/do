@@ -33,6 +33,20 @@ app.use(bodyParser.urlencoded());
 
 app.use(express.static(__dirname + '/public'));
 
+app.post('/add_habit', function(req, res){
+    var habit_name = req.param('name');
+
+    // Save habit
+    var habit = new Habit({ name: habit_name });
+    habit.save(function (err) {
+        if (err) {
+            console.log('Error storing: ' + habit);
+            res.send("Fail!");
+        }
+        res.send("Sent!");
+    });
+})
+
 app.post('/', function(req, res){
     var habit_id = req.param('id');
     var message = {'did' : habit_id};
@@ -41,7 +55,7 @@ app.post('/', function(req, res){
         message: message,
         callback: function(e) {
 
-            // Save habit
+            // Save habitdone
             var habit_done = new HabitDone({ habit: habit_id });
             habit_done.save(function (err) {
                 if (err) {
