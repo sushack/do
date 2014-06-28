@@ -5,7 +5,7 @@ var HabitList = React.createClass({
 		return {items: []};
 	},
 	componentWillMount: function() {
-		reqwest('/habits').then(function(d){
+		reqwest(this.props.endpoint).then(function(d){
 			this.setState({items:d})
 		}.bind(this));
 	},
@@ -16,10 +16,9 @@ var HabitList = React.createClass({
 	});
 
 	return (
-		<div className="commentBox">
-			<h1>Habbits</h1>
+		<div>
 			{HabitNodes}
-		 </div>
+		</div>
 	);
   }
 })
@@ -28,19 +27,20 @@ var HabitList = React.createClass({
 var Habit = React.createClass({
 	render: function(){
 		return (
-			<form method="post" class="habit-form">
-				<h2>{this.props.name} <small>{this.props.id}</small></h2>
+			<form method="post" className="habit-form">
+				<h2>{this.props.name}</h2>
 				<input type="hidden" name="id" value={this.props.id} />
-				<input type="submit" value="done" class="habit-action" />
-				<span class="habit-count">
+				<input type="submit" value="done" className="habit-action" />
+				<span className="habit-count">
 					{this.props.id}
 				</span>
 			</form>
+
 		);
 	}
 })
 
 React.renderComponent(
 	<HabitList endpoint="/habits" />,
-	document.getElementById('content')
+	document.getElementById('habits')
 );

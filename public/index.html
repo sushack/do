@@ -49,58 +49,13 @@
                 />
             </svg>
         </a>
-        <form method="post" class="habit-form">
-            <h2>First habit</h2>
-            <input type="hidden" name="id" value="1">
-            <input type="submit" value="done" class="habit-action">
-            <span class="habit-count">
-                22
-            </span>
-        </form>
-        <form method="post" class="habit-form">
-            <h2>Second habit</h2>
-            <input type="hidden" name="id" value="2">
-            <input type="submit" value="done" class="habit-action">
-            <span class="habit-count">
-                22
-            </span>
-        </form>
-        <form method="post" class="habit-form">
-            <h2>Third habit</h2>
-            <input type="hidden" name="id" value="3">
-            <input type="submit" value="done" class="habit-action">
-            <span class="habit-count">
-                22
-            </span>
-        </form>
-        <form method="post" class="habit-form">
-            <h2>Fourth habit</h2>
-            <input type="hidden" name="id" value="4">
-            <input type="submit" value="done" class="habit-action">
-            <span class="habit-count">
-                22
-            </span>
-        </form>
-        <form method="post" class="habit-form">
-            <h2>Fifth habit</h2>
-            <input type="hidden" name="id" value="5">
-            <input type="submit" value="done" class="habit-action">
-            <span class="habit-count">
-                22
-            </span>
-        </form>
-        <form method="post" action="/add_habit" id="add" class="add-habit-form">
-            <div class="inner">
-                <h2>Create Habit</h2>
-                <input type="text" name="name">
-                <input type="submit" value="Save">
-                <a href="#" class="close">
-                    Close
-                </a>
-            </div>
-        </form>
+        <div id="habits"></div>
+
         <script src="http://cdn.pubnub.com/pubnub.min.js" ></script>
         <script src="reqwest.js" ></script>
+        <script src="lib/react/react.js"></script>
+        <script src="do.js"></script>
+
         <script>
             (function(){
                 var pubnub = PUBNUB.init({
