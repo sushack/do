@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser');
 var express = require('express');
 var mongoose = require('mongoose');
+
 var Schema = mongoose.Schema;
 
 var app = express();
@@ -37,8 +38,8 @@ app.use(express.static(__dirname + '/public'));
 app.get('/habits', function(req, res) {
     var query = Habit.find().select('id_ name');
 
-    query.exec(function (err, habits) {
-        if (err) return handleError(err);
+    query.exec(function (error, habits) {
+        if (error) return handleError(error);
         res.send(habits);
     })
 });
@@ -46,25 +47,41 @@ app.get('/habits', function(req, res) {
 app.get('/habits/:id', function(req, res) {
     var habit_id = req.param('id');
 
-    HabitDone.count({'habit': habit_id }, function(err, count) {
+    HabitDone.count({'habit': habit_id }, function(error, count) {
         res.send({count:count});
     });
 });
 
 app.post('/add_habit', function(req, res){
     var habit_name = req.param('name');
-
-    // Save habit
     var habit = new Habit({ name: habit_name });
-    habit.save(function (err) {
-        if (err) {
+
+    habit.save(function (error) {
+        if (error) {
             console.log('Error storing (Habit): ' + habit);
-            console.log(err);
+            console.log(error);
             res.send("Fail!");
         }
         res.send("Sent!");
     });
 });
+
+app.post('/remove_habit', function(req, res){
+    var habit_id = req.param('id');
+
+    console.log(habit_id);
+    Habit.findByIdAndRemove(habit_id, function(error) {
+        if (error) {
+            console.log('Error removing (Habit): ' + habit_id);
+            console.log(error);
+            res.send("Fail!");
+        }
+        else {
+            res.send("Removed!");
+        }
+    })
+});
+
 
 app.post('/', function(req, res){
     var habit_id = req.param('id');
@@ -77,10 +94,10 @@ app.post('/', function(req, res){
 
             // Save habitdone
             var habit_done = new HabitDone({ habit: habit_id });
-            habit_done.save(function (err) {
-                if (err) {
+            habit_done.save(function (error) {
+                if (error) {
                     console.log('Error storing (HabitDone): ' + habit_done);
-                    console.log(err);
+                    console.log(error);
                 }
             });
         },
@@ -94,8 +111,6 @@ var PORT = process.env.PORT || 3000;
 
 app.listen(PORT);
 
-
-
 // React stuff
 
 var react = require('react-tools'),
@@ -103,9 +118,9 @@ var react = require('react-tools'),
 
 app.get('/do.js', function(req,res){
 
-    fs.readFile('public/do.jsx', function(err, contents){
+    fs.readFile('public/do.jsx', function(error, contents){
 
-        if(err) return res.send('console.log("problem reading file)"');
+        if(error) return res.send('console.log("problem reading file)"');
 
         var output;
         try{
@@ -116,5 +131,5 @@ app.get('/do.js', function(req,res){
         res.send(output);
 
     })
-})
+});
 
