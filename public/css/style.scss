@@ -83,17 +83,40 @@ h1 {
             background-color: rgba(255,255,255,.4);
         }
     }
-    .habit-count {
+    .habit-block {
         position: absolute;
         right: 0;
         top: 0;
         bottom: 0;
-        padding: 20px;
-        width: 60px;
         font-size: 30px;
         line-height: 60px;
         text-align: center;
+    }
+    .habit-count {
+        padding: 20px;
+        width: 60px;
         background-color: rgba(255,255,255,.2);
+    }
+    .habit-remove {
+        width: 0;
+        overflow: hidden;
+        color: transparent;
+    }
+    .habit-count,
+    .habit-remove {
+        @include transition(.2s, width, linear);
+    }
+    &.show-remove {
+        .habit-count {
+            right: 80px;
+        }
+        .habit-remove {
+            width: 80px;
+            font-size: 60px;
+            line-height: 90px;
+            cursor: pointer;
+            color: #d00;
+        }
     }
 
 }
@@ -200,7 +223,6 @@ svg {
                 background-color: lighten(lightgray, 10%);
                 border-color: lighten(lightgray, 8%);
             }
-
         }
     }
 
