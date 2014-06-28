@@ -104,5 +104,35 @@ h1 {
 }
 
 .add-habit-form {
+    display: none;
 
+    &:target {
+        display: block;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        margin: auto;
+
+        .inner {
+            z-index: 10;
+            position: relative;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,.4);
+            padding: 40px;
+            z-index: 100;
+        }
+
+        &:after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,.8);
+            z-index: -1;
+        }
+    }
 }

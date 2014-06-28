@@ -28,7 +28,7 @@
         Do
         </span>
         </h1>
-        <a href="add.html" class="add-new">
+        <a href="#add" class="add-new">
             <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -90,43 +90,48 @@
             </span>
         </form>
         <form method="post" action="/add_habit" id="add" class="add-habit-form">
-            <h2>Create Habit</h2>
-            <input type="text" name="name">
-            <input type="submit" value="done">
+            <div class="inner">
+                <h2>Create Habit</h2>
+                <input type="text" name="name">
+                <input type="submit" value="done">
+                <a href="#" class="close">
+                    Close
+                </a>
+            </div>
         </form>
         <script src="http://cdn.pubnub.com/pubnub.min.js" ></script>
         <script src="reqwest.js" ></script>
         <script>(function(){
-            var pubnub = PUBNUB.init({
-                subscribe_key : 'demo'
-            })
-            pubnub.subscribe({
-                channel : "do_channel",
-                message : function(m){
-                    console.log(m);
-                    var buttons = document.querySelectorAll('[name=id]');
-                    var button;
-                    [].some.call(buttons, function(b){
-                        if(b.value == m.did) return (button = b);
-                    });
-                    var classes = button.parentElement.classList;
-                    classes.add('triggered');
-                    setTimeout(function(){
-                        classes.remove('triggered');
-                    },1000);
-                },
-            })
-            // submit with ajax instead
-            document.addEventListener('submit', function(e){
-                e.preventDefault();
-                var idvalue = e.target.querySelector('[name=id]').value;
-                reqwest({
-                    url: '/'
-                    , method: 'post'
-                    , data: { id: idvalue }
-                    , success: function (resp) {}
-                });
-            }, true);
+        var pubnub = PUBNUB.init({
+        subscribe_key : 'demo'
+        })
+        pubnub.subscribe({
+        channel : "do_channel",
+        message : function(m){
+        console.log(m);
+        var buttons = document.querySelectorAll('[name=id]');
+        var button;
+        [].some.call(buttons, function(b){
+        if(b.value == m.did) return (button = b);
+        });
+        var classes = button.parentElement.classList;
+        classes.add('triggered');
+        setTimeout(function(){
+        classes.remove('triggered');
+        },1000);
+        },
+        })
+        // submit with ajax instead
+        document.addEventListener('submit', function(e){
+        e.preventDefault();
+        var idvalue = e.target.querySelector('[name=id]').value;
+        reqwest({
+        url: '/'
+        , method: 'post'
+        , data: { id: idvalue }
+        , success: function (resp) {}
+        });
+        }, true);
         })();</script>
     </body>
 </html>
