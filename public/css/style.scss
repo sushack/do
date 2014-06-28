@@ -85,9 +85,15 @@ h1 {
     }
     .habit-count {
         position: absolute;
-        right: 20px;
-        bottom: 20px;
-        font-size: 22px;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        padding: 20px;
+        width: 60px;
+        font-size: 30px;
+        line-height: 60px;
+        text-align: center;
+        background-color: rgba(255,255,255,.2);
     }
 
 }
