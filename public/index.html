@@ -51,7 +51,7 @@
         </a>
         <div id="habits"></div>
 
-        
+
         <form method="post" action="/add_habit" id="add" class="add-habit-form">
             <div class="inner">
                 <h2>Create Habit</h2>
@@ -66,6 +66,7 @@
         <script src="http://cdn.pubnub.com/pubnub.min.js" ></script>
         <script src="reqwest.js" ></script>
         <script src="lib/react/react.js"></script>
+        <script src="lib/hammerjs/hammer.min.js"></script>
         <script src="do.js"></script>
 
         <script>
@@ -104,6 +105,28 @@
                         });
                     }
                 }, true);
+
+
+                var hammertime = Hammer(document).on(
+                    "dragleft",
+                    function(e) {
+                        var parent = e.target.parentNode;
+
+                        if (parent.classList.contains('habit-form')) {
+                            parent.classList.add('show-remove');
+                        }
+                    }
+                );
+                var hammertime = Hammer(document).on(
+                    "dragright",
+                    function(e) {
+                        var parent = e.target.parentNode;
+
+                        if (parent.classList.contains('show-remove')) {
+                            parent.classList.remove('show-remove');
+                        }
+                    }
+                );
             })();
         </script>
     </body>

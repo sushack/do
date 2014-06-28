@@ -1,4 +1,4 @@
-/** @jsx React.DOM */ 
+/** @jsx React.DOM */
 
 var HabitList = React.createClass({
 	getInitialState: function() {
@@ -39,9 +39,12 @@ var Habit = React.createClass({
 				<h2>{this.props.name}</h2>
 				<input type="hidden" name="id" value={this.props.id} />
 				<input type="submit" value="done" className="habit-action" />
-				<span className="habit-count">
+                <span className={'habit-block habit-count'}>
 					{this.state.count}
 				</span>
+                <span className={'habit-block habit-remove'}>
+                    &times;
+                </span>
 			</form>
 		);
 	}
