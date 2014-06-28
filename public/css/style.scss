@@ -4,6 +4,11 @@
     -o-transition: $property $duration $timing-function;
     transition: $property $duration $timing-function;
 }
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
 body {
     margin: 0;
     padding: 0;
@@ -12,11 +17,19 @@ body {
 h1 {
     display: block;
     height: 100px;
-    background-position: 10px;
-    background-image: url(do.png);
-    background-repeat: no-repeat;
-    overflow: hidden;
-    text-indent: -999em;
+    margin: 0;
+    padding: 0;
+
+    svg {
+        @include transform(rotate(90deg));
+        fill: #1a1a1a;
+        float: left;
+        width: 60px;
+        margin: 0 20px;
+    }
+    span {
+        display: none;
+    }
 }
 .thing-form {
     width: 100%;
