@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/sushack/do",
   "dependencies": {
+    "body-parser": "~1.4.3",
     "express": "~4.4.5",
-    "body-parser": "~1.4.3"
+    "pubnub": "^3.6.6"
   }
 }
