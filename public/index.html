@@ -48,7 +48,6 @@
             d="M74.632,44.869H55.13v-19.5c0-2.834-2.297-5.13-5.13-5.13c-2.834,0-5.13,2.297-5.13,5.13v19.5H25.368   c-2.834,0-5.13,2.297-5.13,5.13c0,2.834,2.297,5.13,5.13,5.13H44.87v19.501c0,2.834,2.297,5.13,5.13,5.13   c2.834,0,5.13-2.297,5.13-5.13V55.13h19.501c2.834,0,5.13-2.297,5.13-5.13C79.762,47.166,77.465,44.869,74.632,44.869z"
             />
             </svg>
-
         </a>
         <form method="post" class="habit-form">
             <h2>First habit</h2>
@@ -90,54 +89,44 @@
             22
             </span>
         </form>
-
-
+        <form method="post" action="/add_habit" id="add" class="add-habit-form">
+            <h2>Create Habit</h2>
+            <input type="text" name="name">
+            <input type="submit" value="done">
+        </form>
         <script src="http://cdn.pubnub.com/pubnub.min.js" ></script>
         <script src="reqwest.js" ></script>
         <script>(function(){
-
             var pubnub = PUBNUB.init({
                 subscribe_key : 'demo'
             })
-
             pubnub.subscribe({
                 channel : "do_channel",
                 message : function(m){
-
                     console.log(m);
-
                     var buttons = document.querySelectorAll('[name=id]');
                     var button;
-
                     [].some.call(buttons, function(b){
                         if(b.value == m.did) return (button = b);
                     });
-
                     var classes = button.parentElement.classList;
                     classes.add('triggered');
                     setTimeout(function(){
                         classes.remove('triggered');
                     },1000);
-
                 },
             })
-
             // submit with ajax instead
             document.addEventListener('submit', function(e){
                 e.preventDefault();
-
                 var idvalue = e.target.querySelector('[name=id]').value;
-
                 reqwest({
                     url: '/'
                     , method: 'post'
                     , data: { id: idvalue }
                     , success: function (resp) {}
                 });
-
-
             }, true);
-
         })();</script>
     </body>
 </html>
