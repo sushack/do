@@ -64,16 +64,33 @@ var Habit = React.createClass({
 		reqwest('habits/' + this.props.id)
 		.then(this.setState.bind(this));
 	},
+	handleDelete: function(){
+		reqwest({
+		    url: 'habits/' + this.props.id
+		  , method: 'delete'
+		})
+
+		this.setState({
+			removed:true
+		})
+
+	},
 	render: function(){
+
+		var clazz = this.state.removed ? 'removed' :
+					this.state.triggered ? 'habit-form triggered' :
+					'habit-form' ;
+
+
 		return (
-			<form method="post" className={this.state.triggered?'habit-form triggered':'habit-form'}>
+			<form method="post" className={clazz}>
 				<h2>{this.props.name}</h2>
 				<input type="hidden" name="id" value={this.props.id} />
 				<input type="submit" value="done" className="habit-action" />
                 <span className={'habit-block habit-count'}>
 					{this.state.count}
 				</span>
-                <span className={'habit-block habit-remove'}>
+                <span className={'habit-block habit-remove'} onClick={this.handleDelete.bind(this)}>
                     &times;
                 </span>
 			</form>
