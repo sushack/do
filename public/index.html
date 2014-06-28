@@ -5,34 +5,35 @@
 </head>
 <body>
 	<h1>Do</h1>
-	<form method="post" id="things">
-		<ul>
-			<li>
-				<button type="button" value="1" name="id">
-					First thing
-				</button>
-			</li>
-			<li>
-				<button type="button" value="2" name="id">
-					Second item
-				</button>
-			</li>
-			<li>
-				<button type="button" value="3" name="id">
-					Third whatever
-				</button>
-			</li>
-			<li>
-				<button type="button" value="4" name="id">
-					Fourth thing
-				</button>
-			</li>
-			<li>
-				<button type="button" value="5" name="id">
-					Other stuff
-				</button>
-			</li>
-		</ul>
+	<form method="post">
+		<h2>First Thing</h2>
+		<input type="hidden" name="id" value="1">
+		<input type="submit" value="done">
+	</form>
+
+	<form method="post">
+		<h2>Second Thing</h2>
+		<input type="hidden" name="id" value="2">
+		<input type="submit" value="done">
+	</form>
+
+	<form method="post">
+		<h2>Third Thing</h2>
+		<input type="hidden" name="id" value="3">
+		<input type="submit" value="done">
+	</form>
+
+	<form method="post">
+		<h2>Fourth Thing</h2>
+		<input type="hidden" name="id" value="4">
+		<input type="submit" value="done">
+	</form>
+
+
+	<form method="post">
+		<h2>Fifth Thing</h2>
+		<input type="hidden" name="id" value="5">
+		<input type="submit" value="done">
 	</form>
 
 
@@ -49,31 +50,34 @@
 			channel : "do_channel",
 			message : function(m){
 
-				var buttons = document.querySelectorAll('button');
-				[].forEach.call(buttons, function(b){
-					if(b.value == m.did){
-						b.style.background = 'hotpink';
-						setTimeout(function(){
-							b.style.background = '';
-						},1000)
-					}
-				})
-
 				console.log(m)
+
+				var buttons = document.querySelectorAll('[name=id]');
+				var button;
+
+				[].some.call(buttons, function(b){
+					if(b.value == m.did) return (button = b)
+				});
+
+				button.parentElement.style.background = 'hotpink';
+				setTimeout(function(){
+					button.parentElement.style.background = '';
+				},1000);
+
 			},
 		})
 
 		// submit with ajax instead
-		things.addEventListener('click', function(e){
+		document.addEventListener('submit', function(e){
 			e.preventDefault();
+
+			var idvalue = e.target.querySelector('[name=id]').value;
 
 			reqwest({
 				url: '/'
 				, method: 'post'
-				, data: { id: e.target.value }
-				, success: function (resp) {
-					
-				}
+				, data: { id: idvalue }
+				, success: function (resp) {}
 			})
 
 
