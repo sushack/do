@@ -33,6 +33,15 @@ app.use(bodyParser.urlencoded());
 
 app.use(express.static(__dirname + '/public'));
 
+app.get('/habits', function(req, res) {
+    var query = Habit.find().select('name');
+
+    query.exec(function (err, habits) {
+        if (err) return handleError(err);
+        res.send(habits.map(function(habit) { return habit.name }));
+    })
+});
+
 app.post('/add_habit', function(req, res){
     var habit_name = req.param('name');
 
@@ -45,7 +54,7 @@ app.post('/add_habit', function(req, res){
         }
         res.send("Sent!");
     });
-})
+});
 
 app.post('/', function(req, res){
     var habit_id = req.param('id');
