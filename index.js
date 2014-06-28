@@ -47,7 +47,7 @@ app.get('/habits/:id', function(req, res) {
     var habit_id = req.param('id');
 
     HabitDone.count({'habit': habit_id }, function(err, count) {
-        res.send(count);
+        res.send({count:count});
     });
 });
 
