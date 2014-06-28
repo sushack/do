@@ -52,12 +52,12 @@ form {
         @include transition(.2s, background, linear);
 
         &:hover {
-            background-color: #f0f;
+            background-color: rgba(0,0,0,.3);
         }
     }
     &.triggered {
         input[type=submit] {
-            background-color: hotpink;
+            background-color: rgba(255,255,255,.4);
         }
     }
 
