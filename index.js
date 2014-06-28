@@ -43,11 +43,11 @@ app.get('/habits', function(req, res) {
     })
 });
 
-app.get('/habits_done', function(req, res) {
-    var habit_id = req.param('habit_id');
-    console.log(habit_id);
-    HabitDone.count({'habit': habit_id}, function(err, count) {
-        res.send(count);
+app.get('/habits/:id', function(req, res) {
+    var habit_id = req.param('id');
+
+    HabitDone.count({'habit': habit_id }, function(err, count) {
+        res.send({count:count});
     });
 });
 
@@ -56,7 +56,6 @@ app.post('/add_habit', function(req, res){
 
     // Save habit
     var habit = new Habit({ name: habit_name });
-    console.log(habit);
     habit.save(function (err) {
         if (err) {
             console.log('Error storing (Habit): ' + habit);
@@ -69,6 +68,7 @@ app.post('/add_habit', function(req, res){
 
 app.post('/', function(req, res){
     var habit_id = req.param('id');
+
     var message = {'did' : habit_id};
     PUBNUB.publish({
         channel: CHANNEL_NAME,
@@ -82,11 +82,6 @@ app.post('/', function(req, res){
                     console.log('Error storing (HabitDone): ' + habit_done);
                     console.log(err);
                 }
-            });
-
-            // Show counter
-            HabitDone.count({'habit': habit_id}, function(err, count) {
-                res.send(count);
             });
         },
         error: function(e) {
