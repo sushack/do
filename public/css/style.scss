@@ -1,0 +1,64 @@
+@mixin transition($duration, $property: all, $timing-function: linear) {
+    -moz-transition: $property $duration $timing-function;
+    -webkit-transition: $property $duration $timing-function;
+    -o-transition: $property $duration $timing-function;
+    transition: $property $duration $timing-function;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, Arial, sans-serif;
+}
+h1 {
+
+}
+form {
+    width: 100%;
+    height: 100px;
+    position: relative;
+
+    h2 {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+    }
+
+    $colors: #4285f4, #3f51b5, #0f9d58, #ffeb3b, #ff5722, #9c27b0;
+
+    @each $color in $colors {
+        &:nth-child(#{index($colors,$color)}n) {
+            background-color: $color;
+            @if index($colors, $color) == 4 {
+                color: #333;
+            }@else{
+                color: #fff;
+            }
+        }
+    }
+
+    input[type=submit] {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        outline: none;
+        overflow: hidden;
+        text-indent: -9999em;
+        background-color: transparent;
+        @include transition(.2s, background, linear);
+
+        &:hover {
+            background-color: #f0f;
+        }
+    }
+    &.triggered {
+        input[type=submit] {
+            background-color: hotpink;
+        }
+    }
+
+}
