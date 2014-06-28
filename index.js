@@ -62,11 +62,11 @@ app.post('/add_habit', function(req, res){
             console.log(error);
             res.send("Fail!");
         }
-        res.send("Sent!");
+        res.redirect("/");
     });
 });
 
-app.post('/remove_habit', function(req, res){
+app.delete('/habits/:id', function(req, res){
     var habit_id = req.param('id');
 
     console.log(habit_id);
