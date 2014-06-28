@@ -173,25 +173,33 @@ svg {
         }
         input[type=submit],
         .close {
-            border: 4px solid darken(hotpink, 2%);
-            background-color: hotpink;
             outline: none;
             padding: 10px;
             font-size: 20px;
             text-align: center;
             display: inline-block;
             text-decoration: none;
+        }
+        input[type=submit] {
+            border: 4px solid darken(hotpink, 2%);
+            background-color: hotpink;
             color: #fff;
 
             &:hover {
                 background-color: lighten(hotpink, 10%);
                 border-color: lighten(hotpink, 8%);
             }
-        }
-        input[type=submit] {
 
         }
         .close {
+            border: 4px solid darken(lightgray, 2%);
+            background-color: lightgray;
+            color: #555;
+
+            &:hover {
+                background-color: lighten(lightgray, 10%);
+                border-color: lighten(lightgray, 8%);
+            }
 
         }
     }
