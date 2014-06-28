@@ -12,7 +12,7 @@ var HabitList = React.createClass({
 	render: function() {
 
 	var HabitNodes = this.state.items.map(function (data) {
-		return <Habit id={data.id} name={data.name}></Habit>;
+		return <Habit id={data._id} name={data.name}></Habit>;
 	});
 
 	return (
