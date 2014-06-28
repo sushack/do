@@ -20,6 +20,7 @@
     "body-parser": "~1.4.3",
     "express": "~4.4.5",
     "mongoose": "^3.8.12",
-    "pubnub": "^3.6.6"
+    "pubnub": "^3.6.6",
+    "react-tools": "~0.10.0"
   }
 }
