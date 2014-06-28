@@ -86,3 +86,28 @@ app.post('/', function(req, res){
 var PORT = process.env.PORT || 3000;
 
 app.listen(PORT);
+
+
+
+// React stuff
+
+var react = require('react-tools'),
+    fs = require('fs');
+
+app.get('/do.js', function(req,res){
+
+    fs.readFile('public/do.jsx', function(err, contents){
+
+        if(err) return res.send('console.log("problem reading file)"');
+
+        var output;
+        try{
+            output = react.transform(contents.toString());
+        } catch(e){
+            output = 'console.error("JSX Error - ' + e.toString() + '")';
+        }
+        res.send(output);
+
+    })
+})
+
