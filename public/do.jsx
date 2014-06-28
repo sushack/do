@@ -25,6 +25,14 @@ var HabitList = React.createClass({
 
 
 var Habit = React.createClass({
+
+	getInitialState: function() {
+		return {count: 0};
+	},
+	componentWillMount: function() {
+		reqwest('habits/' + this.props.id)
+		.then(this.setState.bind(this));
+	},
 	render: function(){
 		return (
 			<form method="post" className="habit-form">
@@ -32,10 +40,9 @@ var Habit = React.createClass({
 				<input type="hidden" name="id" value={this.props.id} />
 				<input type="submit" value="done" className="habit-action" />
 				<span className="habit-count">
-					{this.props.id}
+					{this.state.count}
 				</span>
 			</form>
-
 		);
 	}
 })
