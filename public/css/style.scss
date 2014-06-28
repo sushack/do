@@ -22,7 +22,6 @@ h1 {
 
     svg {
         @include transform(rotate(90deg));
-        fill: #1a1a1a;
         float: left;
         width: 60px;
         margin: 0 20px;
@@ -102,7 +101,14 @@ h1 {
         height: 60px;
     }
 }
+svg {
+    fill: #1a1a1a;
+    @include transition(.2s, opacity, linear);
 
+    &:hover {
+        opacity: .8;
+    }
+}
 .add-habit-form {
     display: none;
 
