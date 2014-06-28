@@ -30,7 +30,7 @@ var Habit = React.createClass({
 		return (
 			<form method="post" class="habit-form">
 				<h2>{this.props.name} <small>{this.props.id}</small></h2>
-				<input type="hidden" name="id" value="{this.props.id}" />
+				<input type="hidden" name="id" value={this.props.id} />
 				<input type="submit" value="done" class="habit-action" />
 				<span class="habit-count">
 					{this.props.id}
