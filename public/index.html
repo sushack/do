@@ -51,19 +51,19 @@
 			channel : "do_channel",
 			message : function(m){
 
-				console.log(m)
+				console.log(m);
 
 				var buttons = document.querySelectorAll('[name=id]');
 				var button;
 
 				[].some.call(buttons, function(b){
-					if(b.value == m.did) return (button = b)
+					if(b.value == m.did) return (button = b);
 				});
 
 				var classes = button.parentElement.classList;
-				classes.add('triggered')
+				classes.add('triggered');
 				setTimeout(function(){
-					classes.remove('triggered')
+					classes.remove('triggered');
 				},1000);
 
 			},
@@ -80,10 +80,10 @@
 				, method: 'post'
 				, data: { id: idvalue }
 				, success: function (resp) {}
-			})
+			});
 
 
-		}, true)
+		}, true);
 
 	 })();</script>
 </body>
